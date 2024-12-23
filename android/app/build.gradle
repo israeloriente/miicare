@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "io.orientech.jim"
+    namespace "io.orientech.miicare"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "io.orientech.jim"
+        applicationId "io.orientech.miicare"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

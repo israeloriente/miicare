@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "release": "semantic-release",
-    "docs": "npx compodoc -p tsconfig.app.json",
-    "start-docs": "npx compodoc -s"
+    "docs": "npx compodoc -p tsconfig.app.json -d docs",
+    "start-docs": "npx compodoc -s -d docs"
   },
   "private": true,
   "dependencies": {

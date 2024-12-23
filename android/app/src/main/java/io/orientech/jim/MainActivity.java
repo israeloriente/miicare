@@ -1,4 +1,4 @@
-package io.orientech.jim;
+package io.orientech.miicare;
 
 import com.getcapacitor.BridgeActivity;
 
