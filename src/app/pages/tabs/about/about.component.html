@@ -1,3 +1,49 @@
-<p>
-  about works!
-</p>
+<ion-content>
+  <div class="about-container">
+    <ion-img src="../../../../assets/icon/miicare.png" alt="App Logo"></ion-img>
+    <h1>{{ packageJson.name }}</h1>
+    <p>This app was created for an interview test.</p>
+
+    <h2>Features</h2>
+    <ul>
+      <li>Log in and log out of the application</li>
+      <li>View interactive charts</li>
+      <li>Edit user data form</li>
+      <li>View information about the app</li>
+    </ul>
+
+    <h2>Information</h2>
+    <p>
+      Version App: <strong>{{ packageJson.version }}</strong>
+    </p>
+    <p>
+      Ionic Version:
+      <strong>{{ packageJson.dependencies["@ionic/angular"] }}</strong>
+    </p>
+    <p>
+      Capacitor Version:
+      <strong>{{ packageJson.dependencies["@capacitor/android"] }}</strong>
+    </p>
+    <p>
+      Developed by: <strong>{{ packageJson.author }}</strong>
+    </p>
+
+    <h2>Links</h2>
+    <hr />
+    <ion-button
+      (click)="
+        global.simpleAlert('Missing Information', 'No privacy policy available')
+      "
+      >Privacy Policy</ion-button
+    >
+    <ion-button
+      (click)="
+        global.simpleAlert('Missing Information', 'No terms of use available')
+      "
+      >Terms of Use</ion-button
+    >
+
+    <h2>Contact</h2>
+    <p>Email: israelnunesoriente&#64;gmail.com</p>
+  </div>
+</ion-content>

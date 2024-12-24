@@ -7,6 +7,7 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { AccountComponent } from './account/account.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   imports: [
@@ -14,8 +15,8 @@ import { AccountComponent } from './account/account.component';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [TabsPage, AccountComponent]
+  declarations: [TabsPage, AccountComponent, AboutComponent],
 })
 export class TabsPageModule {}
