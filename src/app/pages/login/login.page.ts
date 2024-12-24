@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { GlobalService } from '../services/global.service';
+import { AuthService } from '../../services/auth.service';
+import { GlobalService } from '../../services/global.service';
 
 type LoginError = 'Invalid username or password.' | 'An error occurred. Please try again.' | '';
 
