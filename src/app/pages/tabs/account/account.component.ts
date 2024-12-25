@@ -13,7 +13,10 @@ export class AccountComponent {
   public isEditing: boolean = false;
   public isLoading: boolean = false;
 
-  constructor(private fb: FormBuilder, private global: GlobalService) {
+  constructor(
+    private fb: FormBuilder,
+    private global: GlobalService,
+  ) {
     this.accountForm = this.fb.group(ValidationAccount.getValidationRules());
   }
 

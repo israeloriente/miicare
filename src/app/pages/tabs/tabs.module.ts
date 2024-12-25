@@ -15,22 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    TabsPageRoutingModule,
-    ReactiveFormsModule,
-    NgApexchartsModule,
-  ],
-  declarations: [
-    TabsPage,
-    HomeComponent,
-    AccountComponent,
-    AboutComponent,
-    BarChartComponent,
-    PieChartComponent,
-    TaskTableComponent
-  ],
+  imports: [IonicModule, CommonModule, FormsModule, TabsPageRoutingModule, ReactiveFormsModule, NgApexchartsModule],
+  declarations: [TabsPage, HomeComponent, AccountComponent, AboutComponent, BarChartComponent, PieChartComponent, TaskTableComponent],
 })
 export class TabsPageModule {}

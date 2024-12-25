@@ -23,14 +23,7 @@ export class ValidationAccount {
 
   public static getValidationRules() {
     return {
-      fullName: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(20),
-        ],
-      ],
+      fullName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern(/^(\d{9})$/)]],
       dob: ['', [Validators.required]],
@@ -40,9 +33,7 @@ export class ValidationAccount {
   public static getErrors(field: string, control: any): string[] {
     if (control && control.errors) {
       return Object.keys(control.errors).map((errorKey) => {
-        const errorMessage = this.validationMessages[field].find(
-          (v: any) => v.type === errorKey
-        );
+        const errorMessage = this.validationMessages[field].find((v: any) => v.type === errorKey);
         return errorMessage ? errorMessage.message : '';
       });
     }

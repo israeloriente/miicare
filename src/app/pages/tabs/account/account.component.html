@@ -14,15 +14,8 @@
 <ion-content *ngIf="!isEditing">
   <ion-list *ngIf="isLoading">
     <ion-item *ngFor="let width of [70, 40, 50, 100]">
-      <ion-skeleton-text
-        [animated]="true"
-        [style.width.px]="width"
-      ></ion-skeleton-text>
-      <ion-skeleton-text
-        slot="end"
-        [animated]="true"
-        style="width: 80px"
-      ></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" [style.width.px]="width"></ion-skeleton-text>
+      <ion-skeleton-text slot="end" [animated]="true" style="width: 80px"></ion-skeleton-text>
     </ion-item>
   </ion-list>
   <ion-list *ngIf="!isLoading">
@@ -32,9 +25,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Email</ion-label>
-      <ion-text>{{
-        accountForm.value.email || "johndoe@miicare.com"
-      }}</ion-text>
+      <ion-text>{{ accountForm.value.email || "johndoe@miicare.com" }}</ion-text>
     </ion-item>
     <ion-item>
       <ion-label>Phone</ion-label>
@@ -58,76 +49,37 @@
   <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="stacked">Full Name</ion-label>
-      <ion-input
-        formControlName="fullName"
-        type="text"
-        placeholder="Enter your name"
-      ></ion-input>
+      <ion-input formControlName="fullName" type="text" placeholder="Enter your name"></ion-input>
     </ion-item>
-    <ion-text
-      color="danger"
-      *ngIf="
-        accountForm.get('fullName')?.invalid &&
-        accountForm.get('fullName')?.touched
-      "
-    >
+    <ion-text color="danger" *ngIf="accountForm.get('fullName')?.invalid && accountForm.get('fullName')?.touched">
       {{ getErrors("fullName")[0] }}
     </ion-text>
 
     <ion-item>
       <ion-label position="stacked">Email</ion-label>
-      <ion-input
-        formControlName="email"
-        type="email"
-        placeholder="Enter your email"
-      ></ion-input>
+      <ion-input formControlName="email" type="email" placeholder="Enter your email"></ion-input>
     </ion-item>
-    <ion-text
-      color="danger"
-      *ngIf="
-        accountForm.get('email')?.invalid && accountForm.get('email')?.touched
-      "
-    >
+    <ion-text color="danger" *ngIf="accountForm.get('email')?.invalid && accountForm.get('email')?.touched">
       {{ getErrors("email")[0] }}
     </ion-text>
 
     <ion-item>
       <ion-label position="stacked">Phone</ion-label>
-      <ion-input
-        formControlName="phone"
-        type="tel"
-        placeholder="Enter your phone number"
-      ></ion-input>
+      <ion-input formControlName="phone" type="tel" placeholder="Enter your phone number"></ion-input>
     </ion-item>
-    <ion-text
-      color="danger"
-      *ngIf="
-        accountForm.get('phone')?.invalid && accountForm.get('phone')?.touched
-      "
-    >
+    <ion-text color="danger" *ngIf="accountForm.get('phone')?.invalid && accountForm.get('phone')?.touched">
       {{ getErrors("phone")[0] }}
     </ion-text>
 
     <ion-item>
       <ion-label position="stacked">Date of Birth</ion-label>
-      <ion-input
-        formControlName="dob"
-        type="date"
-        placeholder="Select your date of birth"
-      ></ion-input>
+      <ion-input formControlName="dob" type="date" placeholder="Select your date of birth"></ion-input>
     </ion-item>
-    <ion-text
-      color="danger"
-      *ngIf="accountForm.get('dob')?.invalid && accountForm.get('dob')?.touched"
-    >
+    <ion-text color="danger" *ngIf="accountForm.get('dob')?.invalid && accountForm.get('dob')?.touched">
       {{ getErrors("dob")[0] }}
     </ion-text>
 
-    <ion-button expand="block" type="submit" [disabled]="accountForm.invalid"
-      >Save Changes</ion-button
-    >
-    <ion-button expand="block" color="medium" (click)="isEditing = !isEditing"
-      >Cancel</ion-button
-    >
+    <ion-button expand="block" type="submit" [disabled]="accountForm.invalid">Save Changes</ion-button>
+    <ion-button expand="block" color="medium" (click)="isEditing = !isEditing">Cancel</ion-button>
   </form>
 </ion-content>

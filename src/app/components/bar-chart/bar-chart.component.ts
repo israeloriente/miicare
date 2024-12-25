@@ -1,11 +1,5 @@
 import { Component, EventEmitter, Output, output } from '@angular/core';
-import {
-  ApexChart,
-  ApexXAxis,
-  ApexPlotOptions,
-  ApexDataLabels,
-  ApexFill,
-} from 'ng-apexcharts';
+import { ApexChart, ApexXAxis, ApexPlotOptions, ApexDataLabels, ApexFill } from 'ng-apexcharts';
 import { GlobalService } from 'src/app/services/global.service';
 import * as moment from 'moment';
 import { BarChartTabs, ChartData } from 'src/interfaces/global';
@@ -18,7 +12,10 @@ import { ApiService } from 'src/app/services/api.service';
   standalone: false,
 })
 export class BarChartComponent {
-  constructor(private global: GlobalService, private api: ApiService) {}
+  constructor(
+    private global: GlobalService,
+    private api: ApiService,
+  ) {}
 
   @Output() public scrollToTop = new EventEmitter();
   public selectedTab: BarChartTabs = 'daily';
@@ -84,10 +81,7 @@ export class BarChartComponent {
       const data = await this.api.getChartData();
       this.updateChartData(tab, data);
     } catch (error) {
-      this.global.simpleAlert(
-        'Error',
-        'An error occurred while loading the chart data.'
-      );
+      this.global.simpleAlert('Error', 'An error occurred while loading the chart data.');
     }
     this.isSelectingDateRange = false;
   }
@@ -158,15 +152,9 @@ export class BarChartComponent {
       if (!aggregatedData[month]) aggregatedData[month] = 0;
       if (year == moment().year()) aggregatedData[month] += item.value;
     });
-    const monthsList = Object.keys(aggregatedData).map((month) =>
-      moment(month, 'YYYY-MM').format('MMM').toUpperCase()
-    );
-    const orderedMonths = monthsList.sort(
-      (a, b) => moment(a, 'MMM').month() - moment(b, 'MMM').month()
-    );
-    const seriesData = orderedMonths.map(
-      (month) => aggregatedData[moment(month, 'MMM').format('YYYY-MM')]
-    );
+    const monthsList = Object.keys(aggregatedData).map((month) => moment(month, 'YYYY-MM').format('MMM').toUpperCase());
+    const orderedMonths = monthsList.sort((a, b) => moment(a, 'MMM').month() - moment(b, 'MMM').month());
+    const seriesData = orderedMonths.map((month) => aggregatedData[moment(month, 'MMM').format('YYYY-MM')]);
     this.chartCategories = orderedMonths;
     this.chartSeries = [
       {

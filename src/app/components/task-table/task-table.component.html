@@ -4,9 +4,7 @@
   </ion-card-header>
   <ion-card-content>
     <ion-select [(ngModel)]="filter" placeholder="Select filter">
-      <ion-select-option *ngFor="let filter of filters" [value]="filter">{{
-        filter
-      }}</ion-select-option>
+      <ion-select-option *ngFor="let filter of filters" [value]="filter">{{ filter }}</ion-select-option>
     </ion-select>
 
     <ion-list>

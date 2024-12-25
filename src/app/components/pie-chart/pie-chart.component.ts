@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  ApexChart,
-  ApexNonAxisChartSeries,
-  ApexResponsive,
-} from 'ng-apexcharts';
+import { ApexChart, ApexNonAxisChartSeries, ApexResponsive } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-pie-chart',

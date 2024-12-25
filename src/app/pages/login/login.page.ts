@@ -21,7 +21,10 @@ export class LoginPage {
   public password: string = '';
   public errorMessage: LoginError = '';
 
-  constructor(private authService: AuthService, private global: GlobalService) {}
+  constructor(
+    private authService: AuthService,
+    private global: GlobalService,
+  ) {}
 
   login() {
     this.authService.authenticate(this.username, this.password).then(
@@ -38,7 +41,7 @@ export class LoginPage {
       (error) => {
         console.error('Authentication error:', error);
         this.errorMessage = 'An error occurred. Please try again.';
-      }
+      },
     );
   }
 }

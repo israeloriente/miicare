@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AlertController,
-  NavController,
-  ToastController,
-} from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +8,7 @@ export class GlobalService {
   constructor(
     private nav: NavController,
     private toast: ToastController,
-    private alert: AlertController
+    private alert: AlertController,
   ) {}
 
   /** Opens a new page and closes all previously open pages.

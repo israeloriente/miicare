@@ -7,7 +7,5 @@ import { GlobalService } from '../../services/global.service';
   standalone: false,
 })
 export class TabsPage {
-
   constructor(public global: GlobalService) {}
-
 }
