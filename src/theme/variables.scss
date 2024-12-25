@@ -1,2 +1,24 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+:root {
+  --ion-color-miicare: #2bb8f1;
+  --ion-color-miicare-rgb: 43, 184, 241;
+  --ion-color-miicare-contrast: #ffffff;
+  --ion-color-miicare-contrast-rgb: 0, 0, 0;
+  --ion-color-miicare-shade: #26a2d4;
+  --ion-color-miicare-tint: #40bff2;
+
+  --ion-color-primary: var(--ion-color-miicare);
+  --ion-color-primary-rgb: var(--ion-color-miicare-rgb);
+  --ion-color-primary-contrast: var(--ion-color-miicare-contrast);
+  --ion-color-primary-contrast-rgb: var(--ion-color-miicare-contrast-rgb);
+  --ion-color-primary-shade: var(--ion-color-miicare-shade);
+  --ion-color-primary-tint: var(--ion-color-miicare-tint);
+}
+
+.ion-color-miicare {
+  --ion-color-base: var(--ion-color-miicare);
+  --ion-color-base-rgb: var(--ion-color-miicare-rgb);
+  --ion-color-contrast: var(--ion-color-miicare-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-miicare-contrast-rgb);
+  --ion-color-shade: var(--ion-color-miicare-shade);
+  --ion-color-tint: var(--ion-color-miicare-tint);
+}

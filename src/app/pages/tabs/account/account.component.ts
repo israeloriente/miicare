@@ -39,6 +39,6 @@ export class AccountComponent {
     if (account) this.accountForm.patchValue(account);
     setTimeout(() => {
       this.isLoading = false;
-    }, 800);
+    }, 1500);
   }
 }

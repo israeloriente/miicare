@@ -10,7 +10,7 @@
 
   h1 {
     font-size: 1.8rem;
-    color: var(--ion-color-primary);
+    color: var(--ion-color-miicare);
     margin-bottom: 8px;
   }
 
@@ -23,10 +23,10 @@
 
   h2 {
     font-size: 1.4rem;
-    color: var(--ion-color-secondary);
+    color: var(--ion-color-miicare);
     margin-top: 24px;
     margin-bottom: 8px;
-    border-bottom: 2px solid var(--ion-color-secondary);
+    border-bottom: 2px solid var(--ion-color-miicare);
     display: inline-block;
   }
 
@@ -45,7 +45,7 @@
       &::before {
         content: "✔";
         margin-right: 8px;
-        color: var(--ion-color-success);
+        color: var(--ion-color-miicare);
       }
     }
   }
