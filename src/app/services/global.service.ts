@@ -47,6 +47,11 @@ export class GlobalService {
     return await alert.onWillDismiss();
   }
 
+  logout() {
+    this.setStorage('isLoggedIn', false);
+    this.navToRoot('login');
+  }
+
   /** Updates information related to "key" by replacing it with information from "value".
    *
    * If value is a string, it will be stored right away. Else, it will be converted to string and then stored.

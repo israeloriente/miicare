@@ -28,6 +28,7 @@ export class LoginPage {
       (success) => {
         if (success) {
           this.global.navToRoot('tabs');
+          this.global.setStorage('isLoggedIn', true);
           this.global.simpleToast('Login successful!');
           this.errorMessage = '';
         } else {
