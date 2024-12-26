@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
 import { ApexChart, ApexNonAxisChartSeries, ApexResponsive } from 'ng-apexcharts';
+import { ApiService } from 'src/app/services/api.service';
+import { PieChartData } from 'src/interfaces/global';
 
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
-  styleUrls: ['./pie-chart.component.scss'],
   standalone: false,
 })
 export class PieChartComponent {
-  public chartSeries: ApexNonAxisChartSeries = [44, 55, 13];
-  public chartLabels: string[] = ['Hydration', 'Nutrition', 'Other'];
+  public chartSeries: ApexNonAxisChartSeries = [];
+  public chartLabels: string[] = [];
   public chartColors: string[] = ['#2bb8f1', '#192a43', '#13556f'];
+  public forceChartUpdate: boolean = false;
 
   public chartDetails: ApexChart = {
     type: 'pie',
+    width: '100%',
   };
   public chartResponsive: ApexResponsive[] = [
     {
@@ -26,4 +29,14 @@ export class PieChartComponent {
       },
     },
   ];
+  constructor(private apiService: ApiService) {
+    this.getData();
+  }
+
+  async getData() {
+    const data = await this.apiService.getPieChartData();
+    this.chartSeries = data.map((item: PieChartData) => item.value);
+    this.chartLabels = data.map((item: PieChartData) => item.category);
+    this.forceChartUpdate = true;
+  }
 }

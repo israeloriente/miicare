@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Output, output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ApexChart, ApexXAxis, ApexPlotOptions, ApexDataLabels, ApexFill } from 'ng-apexcharts';
 import { GlobalService } from 'src/app/services/global.service';
-import * as moment from 'moment';
-import { BarChartTabs, ChartData } from 'src/interfaces/global';
+import { BarChartTabs, BarChartData } from 'src/interfaces/global';
 import { ApiService } from 'src/app/services/api.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-bar-chart',
@@ -11,15 +11,13 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./bar-chart.component.scss'],
   standalone: false,
 })
-export class BarChartComponent {
-  constructor(
-    private global: GlobalService,
-    private api: ApiService,
-  ) {}
-
+export class BarChartComponent implements OnInit {
   @Output() public scrollToTop = new EventEmitter();
+
+  constructor(private global: GlobalService, private api: ApiService) {}
+
   public selectedTab: BarChartTabs = 'daily';
-  public startDate: string = '2024-12-10';
+  public startDate: string = '2024-12-01';
   public endDate: string = '2024-12-10';
   public isSelectingDateRange: boolean = false;
   public chartSeries: any[] = [];
@@ -76,9 +74,9 @@ export class BarChartComponent {
     }, 300);
   }
 
-  async loadChartData(tab: BarChartTabs = 'daily') {
+  public async loadChartData(tab: BarChartTabs = 'daily') {
     try {
-      const data = await this.api.getChartData();
+      const data = await this.api.getBarChartData();
       this.updateChartData(tab, data);
     } catch (error) {
       this.global.simpleAlert('Error', 'An error occurred while loading the chart data.');
@@ -86,7 +84,11 @@ export class BarChartComponent {
     this.isSelectingDateRange = false;
   }
 
-  updateChartData(tab: BarChartTabs, data: ChartData[]) {
+  public onTabChange({ detail }: any) {
+    this.loadChartData(detail.value);
+  }
+
+  private updateChartData(tab: BarChartTabs, data: BarChartData[]) {
     switch (tab) {
       case 'daily':
         this.updateDailyData(data);
@@ -100,11 +102,11 @@ export class BarChartComponent {
     }
   }
 
-  updateDailyData(data: ChartData[]) {
+  private updateDailyData(data: BarChartData[]) {
     const daysInMonth = moment().daysInMonth();
     const daysList = Array.from({ length: daysInMonth }, (_, i) => i + 1);
     let aggregatedData: any = {};
-    data.forEach((item: ChartData) => {
+    data.forEach((item: BarChartData) => {
       const day = moment(item.date).date();
       const month = moment(item.date).month();
       const year = moment(item.date).year();
@@ -126,7 +128,7 @@ export class BarChartComponent {
     this.chartXAxis = {
       categories: this.chartCategories,
       title: {
-        text: 'Current Month',
+        text: 'Day of the Month',
         style: {
           fontWeight: 'bold',
           color: '#333',
@@ -144,9 +146,9 @@ export class BarChartComponent {
     };
   }
 
-  updateMonthlyData(data: ChartData[]) {
+  private updateMonthlyData(data: BarChartData[]) {
     let aggregatedData: any = {};
-    data.forEach((item: ChartData) => {
+    data.forEach((item: BarChartData) => {
       const month = moment(item.date).format('YYYY-MM');
       const year = moment(item.date).year();
       if (!aggregatedData[month]) aggregatedData[month] = 0;
@@ -173,18 +175,14 @@ export class BarChartComponent {
     };
   }
 
-  updateCustomData(data: ChartData[]) {
+  private updateCustomData(data: BarChartData[]) {
     const start = moment(this.startDate, 'YYYY-MM-DD');
     const end = moment(this.endDate, 'YYYY-MM-DD');
-    const filteredData = data.filter((item: ChartData) => {
+    const filteredData = data.filter((item: BarChartData) => {
       const itemDate = moment(item.date, 'YYYY-MM-DD');
       return itemDate.isBetween(start, end, 'day', '[]');
     });
     this.updateDailyData(filteredData);
     this.scrollToTop.emit();
-  }
-
-  onTabChange({ detail }: any) {
-    this.loadChartData(detail.value);
   }
 }

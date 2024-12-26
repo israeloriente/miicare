@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { GlobalService } from '../../services/global.service';
+import { DeviceService } from 'src/app/services/device.service';
 
 type LoginError = 'Invalid username or password.' | 'An error occurred. Please try again.' | '';
 
@@ -21,14 +22,11 @@ export class LoginPage {
   public password: string = '';
   public errorMessage: LoginError = '';
 
-  constructor(
-    private authService: AuthService,
-    private global: GlobalService,
-  ) {}
+  constructor(private authService: AuthService, private global: GlobalService, private device: DeviceService) {}
 
   login() {
     this.authService.authenticate(this.username, this.password).then(
-      (success) => {
+      async (success) => {
         if (success) {
           this.global.navToRoot('tabs');
           this.global.setStorage('isLoggedIn', true);
@@ -36,12 +34,12 @@ export class LoginPage {
           this.errorMessage = '';
         } else {
           this.errorMessage = 'Invalid username or password.';
+          await this.device.vibrate();
         }
       },
       (error) => {
-        console.error('Authentication error:', error);
         this.errorMessage = 'An error occurred. Please try again.';
-      },
+      }
     );
   }
 }

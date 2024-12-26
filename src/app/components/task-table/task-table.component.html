@@ -1,16 +1,31 @@
 <ion-card>
   <ion-card-header>
     <ion-card-title>Task List</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-select [(ngModel)]="filter" placeholder="Select filter">
+    <ion-select [(ngModel)]="filter" placeholder="Select filter" (ionChange)="onFilterChange()">
       <ion-select-option *ngFor="let filter of filters" [value]="filter">{{ filter }}</ion-select-option>
     </ion-select>
-
+    <div *ngIf="isDateRange && dataRangeIsOpen">
+      <ion-item>
+        <ion-label position="stacked">Date Start</ion-label>
+        <ion-input type="date" [(ngModel)]="startDateRange" placeholder="Select the Date"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Date End</ion-label>
+        <ion-input type="date" [(ngModel)]="endDateRange" placeholder="Select the Date"></ion-input>
+      </ion-item>
+      <ion-button fill="outline" expand="block" (click)="loadFilteredTasks()">Filter</ion-button>
+    </div>
+    <ion-button fill="outline" expand="block" size="small" *ngIf="isDateRange && !dataRangeIsOpen" (click)="dataRangeIsOpen = true"
+      >Change Date Range</ion-button
+    >
+  </ion-card-header>
+  <ion-card-content *ngIf="!dataRangeIsOpen">
     <ion-list>
       <ion-item *ngFor="let task of filteredTasks">
-        <ion-label>{{ task.name }} - {{ task.date }}</ion-label>
+        <ion-label>{{ task.title }}</ion-label>
+        <p>{{ task.date }}</p>
       </ion-item>
+      <p *ngIf="!filteredTasks.length">No tasks available.</p>
     </ion-list>
   </ion-card-content>
 </ion-card>

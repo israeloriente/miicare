@@ -1,0 +1,12 @@
+ion-card-content {
+  max-height: 300px;
+  overflow-y: auto;
+  ion-label {
+    font-size: 0.8rem !important;
+    font-weight: bold;
+  }
+  p {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+}

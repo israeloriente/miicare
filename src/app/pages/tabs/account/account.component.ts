@@ -13,10 +13,7 @@ export class AccountComponent {
   public isEditing: boolean = false;
   public isLoading: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private global: GlobalService,
-  ) {
+  constructor(private fb: FormBuilder, private global: GlobalService) {
     this.accountForm = this.fb.group(ValidationAccount.getValidationRules());
   }
 
@@ -32,6 +29,7 @@ export class AccountComponent {
   public onSubmit() {
     if (this.accountForm.valid) {
       this.global.setStorage('account', this.accountForm.value);
+      this.global.simpleToast('Account updated!');
       this.isEditing = !this.isEditing;
     }
   }

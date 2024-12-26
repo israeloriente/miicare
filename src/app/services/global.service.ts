@@ -5,11 +5,7 @@ import { AlertController, NavController, ToastController } from '@ionic/angular'
   providedIn: 'root',
 })
 export class GlobalService {
-  constructor(
-    private nav: NavController,
-    private toast: ToastController,
-    private alert: AlertController,
-  ) {}
+  constructor(private nav: NavController, private toast: ToastController, private alert: AlertController) {}
 
   /** Opens a new page and closes all previously open pages.
    * @param route string containing the route to the page. */
@@ -41,6 +37,33 @@ export class GlobalService {
     });
     await alert.present();
     return await alert.onWillDismiss();
+  }
+
+  async confirmAlert(header: string, message: string, ok?: string, cancel?: string) {
+    let response: boolean = false;
+    const alert = await this.alert.create({
+      cssClass: 'alertColor',
+      mode: 'ios',
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: cancel || 'Cancel',
+          handler: () => {
+            response = false;
+          },
+        },
+        {
+          text: ok || 'OK',
+          handler: () => {
+            response = true;
+          },
+        },
+      ],
+    });
+    await alert.present();
+    await alert.onWillDismiss();
+    return response;
   }
 
   logout() {

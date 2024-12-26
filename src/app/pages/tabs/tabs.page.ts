@@ -7,5 +7,11 @@ import { GlobalService } from '../../services/global.service';
   standalone: false,
 })
 export class TabsPage {
-  constructor(public global: GlobalService) {}
+  constructor(private global: GlobalService) {}
+
+  public logout() {
+    this.global.confirmAlert('Warning', 'Do you really want to sign out?', 'Logout').then((yes) => {
+      if (yes) this.global.logout();
+    });
+  }
 }
