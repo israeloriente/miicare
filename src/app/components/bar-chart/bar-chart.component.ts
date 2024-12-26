@@ -69,9 +69,7 @@ export class BarChartComponent implements OnInit {
   };
 
   ngOnInit() {
-    setTimeout(() => {
-      this.loadChartData();
-    }, 300);
+    this.loadChartData();
   }
 
   public async loadChartData(tab: BarChartTabs = 'daily') {
