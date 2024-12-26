@@ -1,7 +1,7 @@
 <ion-card>
   <ion-card-header>
     <ion-card-title>Task List</ion-card-title>
-    <ion-select [(ngModel)]="filter" placeholder="Select filter" (ionChange)="onFilterChange()">
+    <ion-select [(ngModel)]="filter" interface="action-sheet" placeholder="Select filter" (ionChange)="onFilterChange()">
       <ion-select-option *ngFor="let filter of filters" [value]="filter">{{ filter }}</ion-select-option>
     </ion-select>
     <div *ngIf="isDateRange && dataRangeIsOpen">
