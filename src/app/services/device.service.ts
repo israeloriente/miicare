@@ -8,6 +8,6 @@ export class DeviceService {
   constructor() {}
 
   public vibrate = async () => {
-    await Haptics.vibrate({ duration: 500 });
+    await Haptics.vibrate({ duration: 42 });
   };
 }

@@ -12,7 +12,6 @@ export class PieChartComponent {
   public chartSeries: ApexNonAxisChartSeries = [];
   public chartLabels: string[] = [];
   public chartColors: string[] = ['#2bb8f1', '#192a43', '#13556f'];
-  public forceChartUpdate: boolean = false;
 
   public chartDetails: ApexChart = {
     type: 'pie',
@@ -30,13 +29,14 @@ export class PieChartComponent {
     },
   ];
   constructor(private apiService: ApiService) {
-    this.getData();
+    setTimeout(() => {
+      this.getData();
+    }, 2000);
   }
 
   async getData() {
     const data = await this.apiService.getPieChartData();
     this.chartSeries = data.map((item: PieChartData) => item.value);
     this.chartLabels = data.map((item: PieChartData) => item.category);
-    this.forceChartUpdate = true;
   }
 }

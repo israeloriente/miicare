@@ -23,7 +23,7 @@ import { IonContent } from '@ionic/angular';
       </ion-header>
 
       <ion-content #content>
-        <div *ngIf="isLoading">
+        <div [ngStyle]="{ display: isLoading ? 'block' : 'none' }">
           <app-bar-chart (scrollToTop)="scrollToTop()"></app-bar-chart>
           <app-pie-chart></app-pie-chart>
           <app-task-table></app-task-table>
