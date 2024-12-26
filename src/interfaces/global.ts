@@ -1,3 +1,7 @@
+export interface User {
+  username: string;
+  password: string;
+}
 export interface BarChartData {
   date: string;
   value: number;

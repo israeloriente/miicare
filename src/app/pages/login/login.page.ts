@@ -24,7 +24,7 @@ export class LoginPage {
 
   constructor(private authService: AuthService, private global: GlobalService, private device: DeviceService) {}
 
-  login() {
+  public login() {
     this.authService.authenticate(this.username, this.password).then(
       async (success) => {
         if (success) {

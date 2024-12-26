@@ -5,7 +5,15 @@ import { PieChartData } from 'src/interfaces/global';
 
 @Component({
   selector: 'app-pie-chart',
-  templateUrl: './pie-chart.component.html',
+  template: `<ion-card>
+    <ion-card-header>
+      <ion-card-title>Daily Intake Overview</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <apx-chart [series]="chartSeries" [chart]="chartDetails" [responsive]="chartResponsive" [colors]="chartColors" [labels]="chartLabels">
+      </apx-chart>
+    </ion-card-content>
+  </ion-card> `,
   standalone: false,
 })
 export class PieChartComponent implements OnInit {
