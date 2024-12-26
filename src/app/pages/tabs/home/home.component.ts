@@ -23,7 +23,7 @@ import { IonContent } from '@ionic/angular';
       </ion-header>
 
       <ion-content #content>
-        <div [ngStyle]="{ display: isLoading ? 'block' : 'none' }">
+        <div *ngIf="isLoading">
           <app-bar-chart (scrollToTop)="scrollToTop()"></app-bar-chart>
           <app-pie-chart></app-pie-chart>
           <app-task-table></app-task-table>
@@ -49,7 +49,7 @@ export class HomeComponent {
   public ionViewWillEnter() {
     setTimeout(() => {
       this.isLoading = true;
-    }, 1500);
+    }, 800);
   }
 
   public ionViewDidLeave() {

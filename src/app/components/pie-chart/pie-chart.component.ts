@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApexChart, ApexNonAxisChartSeries, ApexResponsive } from 'ng-apexcharts';
 import { ApiService } from 'src/app/services/api.service';
 import { PieChartData } from 'src/interfaces/global';
@@ -8,7 +8,7 @@ import { PieChartData } from 'src/interfaces/global';
   templateUrl: './pie-chart.component.html',
   standalone: false,
 })
-export class PieChartComponent {
+export class PieChartComponent implements OnInit {
   public chartSeries: ApexNonAxisChartSeries = [];
   public chartLabels: string[] = [];
   public chartColors: string[] = ['#2bb8f1', '#192a43', '#13556f'];
@@ -28,10 +28,12 @@ export class PieChartComponent {
       },
     },
   ];
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit() {
     setTimeout(() => {
       this.getData();
-    }, 2000);
+    }, 1000);
   }
 
   async getData() {
