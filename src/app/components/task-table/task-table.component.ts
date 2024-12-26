@@ -35,7 +35,10 @@ export class TaskTableComponent {
   get filteredTasks() {
     switch (this.filter) {
       case 'Upcoming':
-        return this.tasks.filter((task) => new Date(task.date) > new Date());
+        return this.tasks.filter((task) => {
+          const taskDate = moment(task.date, 'YYYY-MM-DD');
+          return taskDate.isAfter(moment());
+        });
       case 'Date Range':
         const startDate = moment(this.startDateRange);
         const endDate = moment(this.endDateRange);
@@ -44,7 +47,10 @@ export class TaskTableComponent {
           return taskDate.isBetween(startDate, endDate, undefined, '[]');
         });
       default:
-        return this.tasks.filter((task) => new Date(task.date).getDate() == new Date().getDate());
+        return this.tasks.filter((task) => {
+          const taskDate = moment(task.date, 'YYYY-MM-DD');
+          return taskDate.isSame(moment(), 'day');
+        });
     }
   }
 
