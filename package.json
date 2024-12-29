@@ -7,7 +7,9 @@
     "build": "ng build",
     "release": "semantic-release",
     "docs": "npx compodoc -p tsconfig.app.json -d docs",
-    "start-docs": "npx compodoc -s -d docs"
+    "start-docs": "npx compodoc -s -d docs",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -49,13 +51,16 @@
     "@angular/cli": "^18.0.0",
     "@angular/compiler-cli": "^18.0.0",
     "@angular/language-service": "^18.0.0",
+    "@faker-js/faker": "^9.3.0",
     "@ionic/angular-toolkit": "^11.0.1",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "cypress": "^13.17.0",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.2.1",
     "eslint-plugin-prefer-arrow": "1.2.2",
+    "fs-extra": "^11.2.0",
     "typescript": "~5.4.0"
   },
   "description": "An Ionic project"

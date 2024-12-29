@@ -19,19 +19,19 @@
     </ion-item>
   </ion-list>
   <ion-list *ngIf="!isLoading">
-    <ion-item>
+    <ion-item data-cy="account-full-name">
       <ion-label>Full Name</ion-label>
       <ion-text>{{ accountForm.value.fullName || "John Doe" }}</ion-text>
     </ion-item>
-    <ion-item>
+    <ion-item data-cy="account-email">
       <ion-label>Email</ion-label>
       <ion-text>{{ accountForm.value.email || "johndoe@miicare.com" }}</ion-text>
     </ion-item>
-    <ion-item>
+    <ion-item data-cy="account-phone">
       <ion-label>Phone</ion-label>
       <ion-text>{{ accountForm.value.phone || "934996868" }}</ion-text>
     </ion-item>
-    <ion-item>
+    <ion-item data-cy="account-dob">
       <ion-label>Date of Birth</ion-label>
       <ion-text>{{ accountForm.value.dob || "1999-02-11" }}</ion-text>
     </ion-item>
