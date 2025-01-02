@@ -17,8 +17,8 @@ export class BarChartComponent implements OnInit {
   constructor(private global: GlobalService, private api: ApiService) {}
 
   public selectedTab: BarChartTabs = 'daily';
-  public startDate: string = '2024-12-01';
-  public endDate: string = '2024-12-10';
+  public startDate: string = '2025-01-01';
+  public endDate: string = '2025-01-10';
   public isSelectingDateRange: boolean = false;
   public chartSeries: any[] = [];
   public chartCategories: string[] = [];
