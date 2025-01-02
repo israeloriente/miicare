@@ -4,6 +4,8 @@ import { GlobalService } from 'src/app/services/global.service';
 import { BarChartTabs, BarChartData } from 'src/interfaces/global';
 import { ApiService } from 'src/app/services/api.service';
 import * as moment from 'moment';
+import { io } from 'socket.io-client';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-bar-chart',
@@ -22,6 +24,7 @@ export class BarChartComponent implements OnInit {
   public isSelectingDateRange: boolean = false;
   public chartSeries: any[] = [];
   public chartCategories: string[] = [];
+  private socket: any;
   public chartDetails: ApexChart = {
     type: 'bar',
     width: '700px',
@@ -76,8 +79,11 @@ export class BarChartComponent implements OnInit {
 
   public async loadChartData(tab: BarChartTabs = 'daily') {
     try {
-      const data = await this.api.getBarChartData();
-      this.updateChartData(tab, data);
+      if (this.socket) this.socket.disconnect();
+      this.socket = io(environment.serverBaseUrl);
+      this.socket.on('bar-chart-update', (data: BarChartData[]) => {
+        this.updateChartData(tab, data);
+      });
     } catch (error) {
       this.global.simpleAlert('Error', 'An error occurred while loading the chart data.');
     }
