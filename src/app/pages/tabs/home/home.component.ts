@@ -3,17 +3,6 @@ import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
-  styles: [
-    `
-      ion-skeleton-text {
-        width: 94%;
-        height: 250px;
-        margin: auto;
-        margin-top: 10px;
-        border-radius: 5px;
-      }
-    `,
-  ],
   template: `
     <ion-app>
       <ion-header>
@@ -23,16 +12,9 @@ import { IonContent } from '@ionic/angular';
       </ion-header>
 
       <ion-content #content>
-        <div *ngIf="isLoading">
-          <app-bar-chart (scrollToTop)="scrollToTop()"></app-bar-chart>
-          <app-pie-chart></app-pie-chart>
-          <app-task-table></app-task-table>
-        </div>
-        <div *ngIf="!isLoading">
-          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-        </div>
+        <app-bar-chart (scrollToTop)="scrollToTop()"></app-bar-chart>
+        <app-pie-chart></app-pie-chart>
+        <app-task-table></app-task-table>
       </ion-content>
     </ion-app>
   `,
@@ -40,19 +22,8 @@ import { IonContent } from '@ionic/angular';
 })
 export class HomeComponent {
   @ViewChild(IonContent, { static: false }) content!: IonContent;
-  protected isLoading: boolean = false;
 
   public scrollToTop() {
     this.content.scrollToTop(300);
-  }
-
-  public ionViewWillEnter() {
-    setTimeout(() => {
-      this.isLoading = true;
-    }, 800);
-  }
-
-  public ionViewDidLeave() {
-    this.isLoading = false;
   }
 }

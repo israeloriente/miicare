@@ -45,7 +45,7 @@ class Chart {
 
       io.emit('pie-chart-update', this.pieChartData);
       io.emit('bar-chart-update', this.barChartData);
-    }, 8000);
+    }, 5000);
 
     io.on('connection', (socket) => {
       socket.emit('pie-chart-update', this.pieChartData);

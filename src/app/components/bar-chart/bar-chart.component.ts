@@ -1,11 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ApexChart, ApexXAxis, ApexPlotOptions, ApexDataLabels, ApexFill } from 'ng-apexcharts';
 import { GlobalService } from 'src/app/services/global.service';
-import { BarChartTabs, BarChartData } from 'src/interfaces/global';
-import { ApiService } from 'src/app/services/api.service';
+import { BarChartTabs, BarChartData } from 'src/interfaces/chart';
 import * as moment from 'moment';
 import { io } from 'socket.io-client';
 import { environment } from 'src/environments/environment';
+import { Chart, registerables } from 'chart.js';
+import { BarChartEmpty } from 'src/interfaces/chartEmpty';
 
 @Component({
   selector: 'app-bar-chart',
@@ -16,65 +16,27 @@ import { environment } from 'src/environments/environment';
 export class BarChartComponent implements OnInit {
   @Output() public scrollToTop = new EventEmitter();
 
-  constructor(private global: GlobalService, private api: ApiService) {}
+  constructor(private global: GlobalService) {
+    Chart.register(...registerables);
+  }
 
   public selectedTab: BarChartTabs = 'daily';
-  public startDate: string = '2025-01-01';
-  public endDate: string = '2025-01-10';
+  public startDate: string = moment().format('YYYY-01-01');
+  public endDate: string = moment().format('YYYY-MM-10');
   public isSelectingDateRange: boolean = false;
-  public chartSeries: any[] = [];
-  public chartCategories: string[] = [];
+  public chart!: any;
   private socket: any;
-  public chartDetails: ApexChart = {
-    type: 'bar',
-    width: '700px',
-    height: 200,
-    toolbar: {
-      show: false,
-    },
-    zoom: {
-      enabled: true,
-      type: 'x',
-      autoScaleYaxis: true,
-    },
-  };
-  public chartColors: string[] = ['#2bb8f1', '#192a43', '#13556f'];
-  public chartPlotOptions: ApexPlotOptions = {
-    bar: {
-      horizontal: false,
-      columnWidth: '50%',
-      borderRadius: 10,
-    },
-  };
-  public chartXAxis: ApexXAxis = {
-    categories: this.chartCategories,
-    labels: {
-      rotate: -45,
-      style: {
-        fontSize: '12px',
-      },
-      formatter: (value) => value.toString(),
-    },
-    axisBorder: {
-      show: true,
-      color: '#ccc',
-    },
-    axisTicks: {
-      show: true,
-      color: '#ccc',
-    },
-  };
-  public chartDataLabels: ApexDataLabels = {
-    enabled: false,
-  };
-  public chartFill: ApexFill = {
-    colors: this.chartColors,
-  };
 
   ngOnInit() {
-    setTimeout(() => {
-      this.loadChartData();
-    }, 1000);
+    this.initializeChart();
+    this.loadChartData();
+  }
+
+  private initializeChart() {
+    let ctx = document.getElementById('barChart') as HTMLCanvasElement;
+    ctx.width = 650;
+    ctx.height = 200;
+    this.chart = new Chart(ctx, BarChartEmpty());
   }
 
   public async loadChartData(tab: BarChartTabs = 'daily') {
@@ -122,34 +84,10 @@ export class BarChartComponent implements OnInit {
       }
     });
     const seriesData = daysList.map((day) => aggregatedData[day] || 0);
-    this.chartCategories = daysList.map((day) => day.toString());
-    this.chartSeries = [
-      {
-        name: 'Daily Data',
-        data: seriesData,
-      },
-    ];
-    this.chartXAxis.categories = this.chartCategories;
 
-    this.chartXAxis = {
-      categories: this.chartCategories,
-      title: {
-        text: 'Day of the Month',
-        style: {
-          fontWeight: 'bold',
-          color: '#333',
-        },
-      },
-      labels: {
-        formatter: (value) => {
-          return value.toString();
-        },
-        style: {
-          fontWeight: 'bold',
-          colors: ['#333'],
-        },
-      },
-    };
+    this.chart.data.labels = daysList.map((day) => day.toString());
+    this.chart.data.datasets[0].data = seriesData;
+    this.chart.update();
   }
 
   private updateMonthlyData(data: BarChartData[]) {
@@ -160,25 +98,15 @@ export class BarChartComponent implements OnInit {
       if (!aggregatedData[month]) aggregatedData[month] = 0;
       if (year == moment().year()) aggregatedData[month] += item.value;
     });
-    const monthsList = Object.keys(aggregatedData).map((month) => moment(month, 'YYYY-MM').format('MMM').toUpperCase());
-    const orderedMonths = monthsList.sort((a, b) => moment(a, 'MMM').month() - moment(b, 'MMM').month());
+    const monthsList = Object.keys(aggregatedData).map((month) => moment(month, 'YYYY-MM').format('MMM'));
+    const orderedMonths = monthsList
+      .sort((a, b) => moment(a, 'MMM').month() - moment(b, 'MMM').month())
+      .filter((value, index, self) => self.indexOf(value) === index);
     const seriesData = orderedMonths.map((month) => aggregatedData[moment(month, 'MMM').format('YYYY-MM')]);
-    this.chartCategories = orderedMonths;
-    this.chartSeries = [
-      {
-        name: 'Monthly Data',
-        data: seriesData,
-      },
-    ];
-    this.chartXAxis.categories = this.chartCategories;
-    this.chartXAxis = {
-      categories: this.chartCategories,
-      labels: {
-        formatter: (value) => {
-          return value.toLowerCase();
-        },
-      },
-    };
+
+    this.chart.data.labels = orderedMonths;
+    this.chart.data.datasets[0].data = seriesData;
+    this.chart.update();
   }
 
   private updateCustomData(data: BarChartData[]) {
@@ -190,5 +118,9 @@ export class BarChartComponent implements OnInit {
     });
     this.updateDailyData(filteredData);
     this.scrollToTop.emit();
+  }
+
+  get chartIsLoading(): boolean {
+    return !this.chart?.data?.labels?.length;
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BarChartData, PieChartData } from 'src/interfaces/global';
+import { BarChartData, PieChartData } from 'src/interfaces/chart';
 
 @Injectable({
   providedIn: 'root',

@@ -12,10 +12,9 @@ import { BarChartComponent } from 'src/app/components/bar-chart/bar-chart.compon
 import { PieChartComponent } from 'src/app/components/pie-chart/pie-chart.component';
 import { TaskTableComponent } from 'src/app/components/task-table/task-table.component';
 import { HomeComponent } from './home/home.component';
-import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
-  imports: [IonicModule, CommonModule, FormsModule, TabsPageRoutingModule, ReactiveFormsModule, NgApexchartsModule],
+  imports: [IonicModule, CommonModule, FormsModule, TabsPageRoutingModule, ReactiveFormsModule],
   declarations: [TabsPage, HomeComponent, AccountComponent, AboutComponent, BarChartComponent, PieChartComponent, TaskTableComponent],
 })
 export class TabsPageModule {}

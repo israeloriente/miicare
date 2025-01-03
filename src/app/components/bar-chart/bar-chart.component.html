@@ -18,15 +18,9 @@
   </ion-card-header>
 
   <ion-card-content>
-    <apx-chart
-      [series]="chartSeries"
-      [chart]="chartDetails"
-      [colors]="chartColors"
-      [xaxis]="chartXAxis"
-      [plotOptions]="chartPlotOptions"
-      [dataLabels]="chartDataLabels"
-      [fill]="chartFill"
-    >
-    </apx-chart>
+    <div class="contentBarChart">
+      <canvas id="barChart"></canvas>
+      <p class="centralizeTotal" *ngIf="chartIsLoading">Loading</p>
+    </div>
   </ion-card-content>
 </ion-card>
