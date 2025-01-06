@@ -26,6 +26,7 @@ export class BarChartComponent implements OnInit {
   public isSelectingDateRange: boolean = false;
   public chart!: any;
   private socket: any;
+  private barChartData: BarChartData[] = [];
 
   ngOnInit() {
     this.initializeChart();
@@ -40,9 +41,11 @@ export class BarChartComponent implements OnInit {
   }
 
   public async loadChartData(tab: BarChartTabs = 'daily') {
+    this.updateChartData(tab, this.barChartData);
     if (this.socket) this.socket.disconnect();
     this.socket = io(environment.serverBaseUrl);
     this.socket.on('bar-chart-update', (data: BarChartData[]) => {
+      this.barChartData = data;
       this.updateChartData(tab, data);
     });
     this.isSelectingDateRange = false;
