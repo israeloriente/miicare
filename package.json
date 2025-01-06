@@ -9,7 +9,9 @@
     "docs": "npx compodoc -p tsconfig.app.json -d docs",
     "start-docs": "npx compodoc -s -d docs",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "dev:android": "ionic capacitor run android -l --external",
+    "dev:ios": "ionic capacitor run ios -l --external"
   },
   "private": true,
   "dependencies": {

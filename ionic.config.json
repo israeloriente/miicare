@@ -1,5 +1,7 @@
 {
   "name": "miicare",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

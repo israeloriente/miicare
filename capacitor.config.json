@@ -1,0 +1,6 @@
+{
+  "appId": "io.orientech.miicare",
+  "appName": "miicare",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
