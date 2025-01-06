@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import * as moment from 'moment';
+import { TaskTableData } from 'src/interfaces/chart';
 
 @Component({
   selector: 'app-task-table',
@@ -11,7 +12,7 @@ import * as moment from 'moment';
 export class TaskTableComponent {
   public filter: string = 'Daily';
   public filters: string[] = ['Daily', 'Upcoming', 'Date Range'];
-  private tasks: any[] = [];
+  private tasks: TaskTableData[] = [];
   public startDateRange: string = moment().format('YYYY-MM-DD');
   public endDateRange: string = moment().format('YYYY-MM-DD');
   public dataRangeIsOpen: boolean = false;

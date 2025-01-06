@@ -40,15 +40,11 @@ export class BarChartComponent implements OnInit {
   }
 
   public async loadChartData(tab: BarChartTabs = 'daily') {
-    try {
-      if (this.socket) this.socket.disconnect();
-      this.socket = io(environment.serverBaseUrl);
-      this.socket.on('bar-chart-update', (data: BarChartData[]) => {
-        this.updateChartData(tab, data);
-      });
-    } catch (error) {
-      this.global.simpleAlert('Error', 'An error occurred while loading the chart data.');
-    }
+    if (this.socket) this.socket.disconnect();
+    this.socket = io(environment.serverBaseUrl);
+    this.socket.on('bar-chart-update', (data: BarChartData[]) => {
+      this.updateChartData(tab, data);
+    });
     this.isSelectingDateRange = false;
   }
 
