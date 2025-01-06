@@ -17,12 +17,19 @@
       Version App: <strong>{{ packageJson.version }}</strong>
     </p>
     <p>
+      Model Name: <strong>{{ deviceInfo.model }}</strong>
+    </p>
+    <p>
       Ionic Version:
       <strong>{{ packageJson.dependencies["@ionic/angular"] }}</strong>
     </p>
     <p>
       Capacitor Version:
       <strong>{{ packageJson.dependencies["@capacitor/android"] }}</strong>
+    </p>
+    <p>
+      Version {{ deviceInfo.platform }}:
+      <strong>{{ deviceInfo.osVersion }}</strong>
     </p>
     <p>
       Developed by: <strong>{{ packageJson.author }}</strong>

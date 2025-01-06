@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DeviceService } from 'src/app/services/device.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { environment } from 'src/environments/environment';
 
@@ -9,5 +10,11 @@ import { environment } from 'src/environments/environment';
 })
 export class AboutComponent {
   public packageJson: any = environment.packageJson;
-  constructor(public global: GlobalService) {}
+  public deviceInfo: any = {};
+
+  constructor(public global: GlobalService, private device: DeviceService) {
+    device.getDeviceInfo().then((info) => {
+      this.deviceInfo = info;
+    });
+  }
 }
